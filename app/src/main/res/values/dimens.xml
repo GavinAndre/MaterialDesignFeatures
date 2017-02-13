@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="status_bar_height">0dp</dimen>
+
+    <!--ToolBarScrollBehavior-->
+    <dimen name="actionbar_size_offset">56dp</dimen>
+
+    <!-- AvatarImageBehavior -->
+    <dimen name="avatar_final_size">40dp</dimen>
+    <dimen name="avatar_final_x">8dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+
+    <!--CardView shadow margin under Lollipop-->
+    <dimen name="card_view_margin">0dp</dimen>
+
+</resources>

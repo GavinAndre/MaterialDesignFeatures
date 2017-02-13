@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tool="http://schemas.android.com/tools"
-                                                 android:id="@+id/coordinator_layout"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="true">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar_layout"
@@ -75,9 +75,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:text="鲁提辖"
                         android:textColor="@android:color/white"
-                        android:textSize="30sp"
-                        tool:text="鲁提辖"/>
+                        android:textSize="30sp"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -89,11 +89,10 @@
                             android:id="@+id/tv_region"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="4dp"
-                            android:textColor="@android:color/white"
-                            tool:text="闵行区"/>
+                            android:text="闵行区"
+                            android:textColor="@android:color/white"/>
 
                         <TextView
                             android:id="@+id/tv_sex"
@@ -105,8 +104,8 @@
                             android:layout_marginTop="4dp"
                             android:layout_toEndOf="@id/tv_region"
                             android:layout_toRightOf="@id/tv_region"
-                            android:textColor="@android:color/white"
-                            tool:text="男"/>
+                            android:text="男"
+                            android:textColor="@android:color/white"/>
 
                     </RelativeLayout>
                 </RelativeLayout>
@@ -116,7 +115,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_overlapTop="15dp"
@@ -131,20 +130,14 @@
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/Swipe_refresh_layout"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/input_box">
+                android:text="@string/large_text"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/large_text"
-                    />
-            </android.support.v4.widget.SwipeRefreshLayout>
         </android.support.v7.widget.CardView>
-    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
@@ -159,6 +152,6 @@
         app:civ_border_width="2dp"
         app:layout_anchor="@+id/collapsing"
         app:layout_anchorGravity="right"
-        app:layout_behavior="com.yulin.alarmclock.view.AvatarBehavior"/>
+        app:layout_behavior="@string/avatar_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

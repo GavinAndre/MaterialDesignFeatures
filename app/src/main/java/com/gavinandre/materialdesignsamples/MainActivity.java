@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gavinandre.materialdesignsamples.ui.Activity.CustomBehavior2Activity;
+import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior1Activity;
+import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior2Activity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.custom_behavior1:
-
+                Intent intent1 = new Intent(MainActivity.this, CustomBehavior1Activity.class);
+                startActivity(intent1);
                 break;
             case R.id.custom_behavior2:
-                Intent intent = new Intent(MainActivity.this, CustomBehavior2Activity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(MainActivity.this, CustomBehavior2Activity.class);
+                startActivity(intent2);
                 break;
         }
     }

@@ -93,17 +93,12 @@ public class AvatarBehavior extends CoordinatorLayout.Behavior<CircleImageView> 
             mPercent = (mAppBarStartY - dependency.getY()) * 1.0f / mTotalScrollRange;
             float percentY = mMoveYInterpolator.getInterpolation(mPercent);
             setViewY(child, mOriginalY, mFinalY - mScaleSize, percentY);
-
-            //            Log.i(TAG, "mPercent: " + mPercent);
-            //            Log.i(TAG, "ANIM_CHANGE_POINT: " + ANIM_CHANGE_POINT);
             if (mPercent > ANIM_CHANGE_POINT) {
-                //                Log.i(TAG, "if: ");
                 float scalePercent = (mPercent - ANIM_CHANGE_POINT) / (1 - ANIM_CHANGE_POINT);
                 float percentX = mMoveXInterpolator.getInterpolation(scalePercent);
                 scaleView(child, mOriginalSize, mFinalSize, scalePercent);
                 setViewX(child, mOriginalX, mFinalX - mScaleSize, percentX);
             } else {
-                //                Log.i(TAG, "else: ");
                 scaleView(child, mOriginalSize, mFinalSize, 0);
                 setViewX(child, mOriginalX, mFinalX - mScaleSize, 0);
             }
@@ -118,7 +113,6 @@ public class AvatarBehavior extends CoordinatorLayout.Behavior<CircleImageView> 
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && dependency instanceof CollapsingToolbarLayout) {
             // 大于5.0才生成新的最终的头像，因为5.0以上AppBarLayout会覆盖变换后的头像
             if (mFinalView == null && mFinalSize != 0 && mFinalX != 0 && mFinalViewMarginBottom != 0) {
-                //                Log.i(TAG, "5.0&&CollapsingToolbarLayout: 2");
                 mFinalView = new CircleImageView(mContext);
                 mFinalView.setVisibility(View.GONE);
                 // 添加为CollapsingToolbarLayout子视图
@@ -181,12 +175,7 @@ public class AvatarBehavior extends CoordinatorLayout.Behavior<CircleImageView> 
             if (mToolBarHeight == 0) {
                 mToolBarHeight = mContext.getResources().getDimensionPixelSize(R.dimen.toolbar_height);
             }
-            int statusBarHeight;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                statusBarHeight = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_height);
-            } else {
-                statusBarHeight = 0;
-            }
+            int statusBarHeight = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_height);
             mFinalY = (mToolBarHeight - mFinalSize) / 2 + mAppBarStartY + statusBarHeight;
         }
         if (mScaleSize == 0) {

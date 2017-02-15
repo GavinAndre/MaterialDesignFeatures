@@ -36,8 +36,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
     private Handler mHandler;
 
-    private boolean isExpand = false;
-
     private boolean isScrolling = false;
 
     private Context mContext;
@@ -183,7 +181,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
                 getDependencyView().setTranslationY(mOverScroller.getCurrY());
                 mHandler.post(this);
             } else {
-                isExpand = getDependencyView().getTranslationX() != 0;
                 isScrolling = false;
             }
         }

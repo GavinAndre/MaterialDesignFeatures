@@ -113,7 +113,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         View dependencyView = getDependencyView();
         //View dependencyView = getDependencyView();
         float transY = dependencyView.getTranslationY() - dy;
-        Log.i(TAG, "transY:" + transY + "++++dependencyView.getTranslationY():" + dependencyView.getTranslationY() + "---->dy:" + dy);
         if (transY < 0 && -transY < getToolbarSpreadHeight()) {
             dependencyView.setTranslationY(transY);
             consumed[1] = dy;

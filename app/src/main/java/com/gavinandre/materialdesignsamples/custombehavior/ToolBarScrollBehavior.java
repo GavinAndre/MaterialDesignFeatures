@@ -46,7 +46,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
     public ToolBarScrollBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.i(TAG, "ToolBarScrollBehavior: ");
         mContext = context;
         mOverScroller = new OverScroller(context);
         mHandler = new Handler();
@@ -111,7 +110,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
             return;
         }
         View dependencyView = getDependencyView();
-        //View dependencyView = getDependencyView();
         float transY = dependencyView.getTranslationY() - dy;
         if (transY < 0 && -transY < getToolbarSpreadHeight()) {
             dependencyView.setTranslationY(transY);
@@ -128,7 +126,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         }
         View dependencyView = getDependencyView();
         float transY = dependencyView.getTranslationY() - dyUnconsumed;
-        Log.i(TAG, "------>transY:" + transY + "******dependencyView.getTranslationY():" + dependencyView.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
         if (transY < 0) {
             dependencyView.setTranslationY(transY);
         }
@@ -150,23 +147,10 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
     private boolean onUserStopDragging(float velocity) {
         View dependentView = getDependencyView();
         float translateY = dependentView.getTranslationY();
-        //float minHeaderTranslate = -(dependentView.getHeight() - getToolbarSpreadHeight());
         float minHeaderTranslate = -(dependentView.getY() + getToolbarSpreadHeight());
-        Log.i(TAG, "onUserStopDragging: translateY" + translateY);
-        Log.i(TAG, "onUserStopDragging: getToolbarSpreadHeight" + getToolbarSpreadHeight());
-        Log.i(TAG, "onUserStopDragging: minHeaderTranslate" + minHeaderTranslate);
-        Log.i(TAG, "onUserStopDragging: dependentView.getY()" + dependentView.getY());
-        Log.i(TAG, "onUserStopDragging: -getToolbarSpreadHeight()" + -getToolbarSpreadHeight());
-
-        Log.i(TAG, "onUserStopDragging: translateY == dependentView.getY() " + (translateY == dependentView.getY()));
-
         if (translateY == 0 || translateY == -getToolbarSpreadHeight()) {
             return false;
         }
-
-        Log.i(TAG, "onUserStopDragging: Math.abs(translateY)" + Math.abs(translateY));
-        Log.i(TAG, "onUserStopDragging: Math.abs(translateY - minHeaderTranslate)" + Math.abs(translateY - minHeaderTranslate));
-
         boolean targetState; // Flag indicates whether to expand the content.
         if (Math.abs(velocity) <= 800) {
             if (Math.abs(translateY) < Math.abs(translateY - minHeaderTranslate)) {
@@ -185,10 +169,6 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
         float targetTranslateY = targetState ? minHeaderTranslate : -dependentView.getY();
         mOverScroller.startScroll(0, (int) translateY, 0, (int) (targetTranslateY), (int) (1000000 / Math.abs(velocity)));
-        Log.i(TAG, "onUserStopDragging: targetTranslateY" + targetTranslateY);
-        Log.i(TAG, "onUserStopDragging: startY" + (int) translateY);
-        Log.i(TAG, "onUserStopDragging: dy" + (int) (targetTranslateY + translateY));
-
         mHandler.post(flingRunnable);
         isScrolling = true;
 

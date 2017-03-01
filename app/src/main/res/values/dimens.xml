@@ -16,4 +16,9 @@
     <!--CardView shadow margin under Lollipop-->
     <dimen name="card_view_margin">0dp</dimen>
 
+    <dimen name="header_offset">50dp</dimen>
+
+    <dimen name="collapsedTitleHeight">50dp</dimen>
+    <dimen name="title_init_y">150dp</dimen>
+    <dimen name="title_margin_left">70dp</dimen>
 </resources>

@@ -20,13 +20,22 @@
             android:id="@+id/custom_behavior1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:gravity="center_vertical"
             android:text="自定义Behavior之Floating头像"/>
 
         <TextView
             android:id="@+id/custom_behavior2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:gravity="center_vertical"
             android:text="自定义Behavior之ToolBar上滑TabLayout颜色渐变"/>
+
+        <TextView
+            android:id="@+id/custom_behavior3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="自定义Behavior之背景渐隐FAB位移"/>
 
     </LinearLayout>
 

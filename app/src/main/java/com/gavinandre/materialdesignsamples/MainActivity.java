@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior1Activity;
 import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior2Activity;
+import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior3Activity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     TextView mCustomBehavior1;
     @BindView(R.id.custom_behavior2)
     TextView mCustomBehavior2;
+    @BindView(R.id.custom_behavior3)
+    TextView mCustomBehavior3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +30,17 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.custom_behavior1, R.id.custom_behavior2})
+    @OnClick({R.id.custom_behavior1, R.id.custom_behavior2, R.id.custom_behavior3})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.custom_behavior1:
-                Intent intent1 = new Intent(MainActivity.this, CustomBehavior1Activity.class);
-                startActivity(intent1);
+                startActivity(new Intent(MainActivity.this, CustomBehavior1Activity.class));
                 break;
             case R.id.custom_behavior2:
-                Intent intent2 = new Intent(MainActivity.this, CustomBehavior2Activity.class);
-                startActivity(intent2);
+                startActivity(new Intent(MainActivity.this, CustomBehavior2Activity.class));
+                break;
+            case R.id.custom_behavior3:
+                startActivity(new Intent(MainActivity.this, CustomBehavior3Activity.class));
                 break;
         }
     }

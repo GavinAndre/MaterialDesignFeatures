@@ -6,6 +6,12 @@
     <string name="avatar_behavior" translatable="false">
         com.gavinandre.materialdesignsamples.custombehavior.AvatarBehavior</string>
 
+    <string name="content_behavior" translatable="false">
+        com.gavinandre.materialdesignsamples.custombehavior.HeaderScrollBehavior</string>
+    <string name="floating_title_behavoir" translatable="false">
+        com.gavinandre.materialdesignsamples.custombehavior.FloatingHeaderTitleBehavior</string>
+
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

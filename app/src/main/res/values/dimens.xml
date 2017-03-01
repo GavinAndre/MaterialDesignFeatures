@@ -5,6 +5,8 @@
 
     <dimen name="status_bar_height">0dp</dimen>
 
+    <dimen name="fab_margin">16dp</dimen>
+
     <!--ToolBarScrollBehavior-->
     <dimen name="actionbar_size_offset">56dp</dimen>
 
@@ -16,9 +18,10 @@
     <!--CardView shadow margin under Lollipop-->
     <dimen name="card_view_margin">0dp</dimen>
 
-    <dimen name="header_offset">50dp</dimen>
+    <dimen name="header_offset">100dp</dimen>
+    <dimen name="header_height">250dp</dimen>
 
     <dimen name="collapsedTitleHeight">50dp</dimen>
     <dimen name="title_init_y">150dp</dimen>
-    <dimen name="title_margin_left">70dp</dimen>
+    <dimen name="title_margin_left">50dp</dimen>
 </resources>

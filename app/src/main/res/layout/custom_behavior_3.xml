@@ -9,16 +9,14 @@
     <ImageView
         android:id="@+id/scrolling_header"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="@mipmap/banner3"/>
 
-    <!--CollapsingToolbarLayout+toolbar做色差效果要把-->
-    <!--toolbar背景设为透明才有水波纹效果-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
+        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -46,7 +44,7 @@
             />
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -60,9 +58,24 @@
             android:gravity="center_vertical"
             android:layout_marginLeft="20dp"
             />
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/content_behavior">
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/large_text"
+            />
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -72,12 +85,13 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabBackground="@android:color/white"
             app:tabMode="fixed"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
 </android.support.design.widget.CoordinatorLayout>

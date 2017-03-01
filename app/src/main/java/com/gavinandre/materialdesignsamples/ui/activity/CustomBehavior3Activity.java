@@ -24,12 +24,12 @@ public class CustomBehavior3Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_behavior_3);
-        initTabLayout();
+        //initTabLayout();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    private void initTabLayout() {
+    /*private void initTabLayout() {
         String[] titles = {"搞笑", "科技", "创业"};
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         List<Fragment> fragments = new ArrayList<Fragment>();
@@ -46,5 +46,5 @@ public class CustomBehavior3Activity extends AppCompatActivity {
         // 将ViewPager和TabLayout绑定
         tablayout.setupWithViewPager(viewPager);
 
-    }
+    }*/
 }

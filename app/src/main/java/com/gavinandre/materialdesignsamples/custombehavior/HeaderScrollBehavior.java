@@ -2,12 +2,15 @@ package com.gavinandre.materialdesignsamples.custombehavior;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.OverScroller;
 
 import com.gavinandre.materialdesignsamples.R;
@@ -41,39 +44,12 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        if (isDepend(dependency)) {
-            //Log.i("zhouwei","isDeoendent : true");
-            mDependencyView = new WeakReference<View>(dependency);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
-        Resources resources = getDependencyView().getResources();
-        final float progress = 1.f -
-                Math.abs(dependency.getTranslationY() / (dependency.getHeight() - resources.getDimension(R.dimen.header_offset)));
-        Log.i(TAG, "dependency.getTranslationY():" + dependency.getTranslationY());
-        child.setTranslationY(dependency.getHeight() + dependency.getTranslationY());
-
-        float scale = 1 + 0.4f * (1.f - progress);
-        dependency.setScaleX(scale);
-        dependency.setScaleY(scale);
-
-        dependency.setAlpha(progress);
-
-
-        return true;
-    }
-
-    @Override
     public boolean onLayoutChild(CoordinatorLayout parent, View child, int layoutDirection) {
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
         if (params != null && params.height == CoordinatorLayout.LayoutParams.MATCH_PARENT) {
-            child.layout(0, 0, parent.getWidth(), parent.getHeight() - getHeaderCollspateHeight());
+            //child.layout(0, 0, parent.getWidth(), parent.getHeight() - getHeaderCollspateHeight());
+            child.layout(0, 0, parent.getWidth(), parent.getHeight());
+            child.setTranslationY(getHeaderHeight());
             return true;
         }
 
@@ -99,13 +75,20 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         if (dy < 0) {
             return;
         }
-        View dependentView = getDependencyView();
+        /*View dependentView = getDependencyView();
         Log.i(TAG, "TranslationY():" + dependentView.getTranslationY() + " dy---->" + dy);
         float newTranslationY = dependentView.getTranslationY() - dy;
         float minHeaderTranslation = -(dependentView.getHeight() - getHeaderCollspateHeight());
         Log.i(TAG, "onNestedPreScroll:::newTranslationY:" + newTranslationY + "--->minHeaderTranslation" + minHeaderTranslation);
         if (newTranslationY > minHeaderTranslation) {
             dependentView.setTranslationY(newTranslationY);
+            consumed[1] = dy;
+        }*/
+
+        float transY = child.getTranslationY() - dy;
+        Log.i(TAG, "transY:" + transY + "++++child.getTranslationY():" + child.getTranslationY() + "---->dy:" + dy);
+        if (transY > 0) {
+            child.setTranslationY(transY);
             consumed[1] = dy;
         }
     }
@@ -117,16 +100,22 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         if (dyUnconsumed > 0) {
             return;
         }
-        View dependentView = getDependencyView();
+        /*View dependentView = getDependencyView();
         float newTranslateY = dependentView.getTranslationY() - dyUnconsumed;
         final float maxHeaderTranslate = 0;
         Log.i(TAG, "onNestedScroll:::newTranslateY:" + newTranslateY + "--->maxHeaderTranslate" + maxHeaderTranslate);
         if (newTranslateY < maxHeaderTranslate) {
             dependentView.setTranslationY(newTranslateY);
+        }*/
+
+        float transY = child.getTranslationY() - dyUnconsumed;
+        Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
+        if (transY > 0 && transY < getHeaderHeight()) {
+            child.setTranslationY(transY);
         }
     }
 
-    @Override
+    /*@Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
         return onUserStopDragging(velocityY);
     }
@@ -136,7 +125,7 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         if (!isScrolling) {
             onUserStopDragging(800);
         }
-    }
+    }*/
 
     private boolean onUserStopDragging(float velocity) {
         View dependentView = getDependencyView();
@@ -186,6 +175,10 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
      */
     public int getHeaderCollspateHeight() {
         return mContext.getResources().getDimensionPixelOffset(R.dimen.header_offset);
+    }
+
+    public int getHeaderHeight() {
+        return mContext.getResources().getDimensionPixelOffset(R.dimen.header_height);
     }
 
     public boolean isDepend(View dependency) {

@@ -63,7 +63,7 @@ public class FloatingHeaderTitleBehavior extends CoordinatorLayout.Behavior<View
 
     private boolean isDependent(View dependency) {
 
-        return dependency != null && dependency.getId() == R.id.scrolling_header;
+        return dependency != null && dependency.getId() == R.id.scrollView;
     }
 
     private int getCollapsedHeight() {

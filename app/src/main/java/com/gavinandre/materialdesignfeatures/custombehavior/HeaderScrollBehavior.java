@@ -21,7 +21,7 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
     public static final String TAG = "HeaderScrollBehavior";
     private final Context mContext;
 
-    private WeakReference<View> mDependencyView;
+    private WeakReference<View> mChildView;
 
     private OverScroller mOverScroller;
 
@@ -46,6 +46,7 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
             //child.layout(0, 0, parent.getWidth(), parent.getHeight() - getHeaderCollspateHeight());
             child.layout(0, 0, parent.getWidth(), parent.getHeight());
             child.setTranslationY(getHeaderHeight());
+            mChildView = new WeakReference<>(child);
             return true;
         }
 
@@ -68,22 +69,15 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, View get, int dx, int dy, int[] consumed) {
         Log.e(TAG, "--->invoke onNestedPreScroll");
         Log.i(TAG, "dy---->" + dy);
+        //上滑操作dy值大于0,因此小于0直接分发给onNestedScroll
         if (dy < 0) {
             return;
         }
-        /*View dependentView = getDependencyView();
-        Log.i(TAG, "TranslationY():" + dependentView.getTranslationY() + " dy---->" + dy);
-        float newTranslationY = dependentView.getTranslationY() - dy;
-        float minHeaderTranslation = -(dependentView.getHeight() - getHeaderCollspateHeight());
-        Log.i(TAG, "onNestedPreScroll:::newTranslationY:" + newTranslationY + "--->minHeaderTranslation" + minHeaderTranslation);
-        if (newTranslationY > minHeaderTranslation) {
-            dependentView.setTranslationY(newTranslationY);
-            consumed[1] = dy;
-        }*/
 
+        //上滑位置不小于100dp
         float transY = child.getTranslationY() - dy;
         Log.i(TAG, "transY:" + transY + "++++child.getTranslationY():" + child.getTranslationY() + "---->dy:" + dy);
-        if (transY > 0) {
+        if (transY > 0 && transY >= getHeaderCollspateHeight()) {
             child.setTranslationY(transY);
             consumed[1] = dy;
         }
@@ -93,51 +87,60 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         Log.e(TAG, "++++invoke onNestedScroll");
         Log.i(TAG, "dyUnconsumed:" + dyUnconsumed);
+        //上滑到底部并越界后dyUnconsumed值大于0直接忽略
         if (dyUnconsumed > 0) {
             return;
         }
-        /*View dependentView = getDependencyView();
-        float newTranslateY = dependentView.getTranslationY() - dyUnconsumed;
-        final float maxHeaderTranslate = 0;
-        Log.i(TAG, "onNestedScroll:::newTranslateY:" + newTranslateY + "--->maxHeaderTranslate" + maxHeaderTranslate);
-        if (newTranslateY < maxHeaderTranslate) {
-            dependentView.setTranslationY(newTranslateY);
-        }*/
 
+        //下滑位置不超过200dp
         float transY = child.getTranslationY() - dyUnconsumed;
         Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
-        if (transY > 0 && transY < getHeaderHeight()) {
+        if (transY > 0 && transY <= getHeaderHeight()) {
             child.setTranslationY(transY);
         }
     }
 
-    /*@Override
+    @Override
     public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY) {
-        return onUserStopDragging(velocityY);
+        return onUserStopDragging(velocityY, child);
     }
 
     @Override
     public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target) {
         if (!isScrolling) {
-            onUserStopDragging(800);
+            onUserStopDragging(800, child);
         }
-    }*/
+    }
 
-    private boolean onUserStopDragging(float velocity) {
-        View dependentView = getDependencyView();
-        float translateY = dependentView.getTranslationY();
-        float minHeaderTranslate = -(dependentView.getHeight() - getHeaderCollspateHeight());
+    private boolean onUserStopDragging(float velocity, View child) {
+        float translateY = child.getTranslationY();
+        float minHeaderTranslate = getHeaderCollspateHeight();
+        float maxHeaderTranslate = getHeaderHeight();
+        float midHeaderTranslate = maxHeaderTranslate - minHeaderTranslate;
 
-        Log.i(TAG, "onUserStopDragging: translateY" + translateY);
-        Log.i(TAG, "onUserStopDragging: translateY == minHeaderTranslate " + (translateY == minHeaderTranslate));
 
-        if (translateY == 0 || translateY == minHeaderTranslate) {
+        float y = translateY - maxHeaderTranslate;
+        float ym = y + midHeaderTranslate;
+
+
+        //Log.e(TAG, "onUserStopDragging: translateY " + translateY);
+        //Log.i(TAG, "onUserStopDragging: minHeaderTranslate " + minHeaderTranslate);
+        //Log.i(TAG, "onUserStopDragging: maxHeaderTranslate " + maxHeaderTranslate);
+        //Log.i(TAG, "onUserStopDragging: midHeaderTranslate " + midHeaderTranslate);
+        //Log.i(TAG, "onUserStopDragging: maxHeaderTranslate - translateY " + (maxHeaderTranslate - translateY));
+        Log.i(TAG, "onUserStopDragging: y " + y);
+        Log.i(TAG, "onUserStopDragging: ym " + ym);
+        //Log.i(TAG, "onUserStopDragging: translateY == minHeaderTranslate " + (translateY == minHeaderTranslate));
+
+        if (translateY == getHeaderCollspateHeight() || translateY == getHeaderHeight()) {
             return false;
         }
 
+        //在这里计算有没有超过中间态
         boolean targetState; // Flag indicates whether to expand the content.
         if (Math.abs(velocity) <= 800) {
-            if (Math.abs(translateY) < Math.abs(translateY - minHeaderTranslate)) {
+            //y范围(-450~0) ym范围(0~450),取绝对值比大小来判断滑动距离有没有超过1/2
+            if (Math.abs(y) < Math.abs(ym)) {
                 targetState = false;
             } else {
                 targetState = true;
@@ -151,7 +154,17 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
             }
         }
 
-        float targetTranslateY = targetState ? minHeaderTranslate : 0;
+        //根据targetState判断,超过中间态自动滑动剩余距离,没有则回到原处
+        float targetTranslateY = targetState ? minHeaderTranslate : maxHeaderTranslate;
+
+        //Log.e(TAG, "onUserStopDragging: targetState " + targetState);
+        //Log.i(TAG, "onUserStopDragging: targetTranslateY " + targetTranslateY);
+        //Log.i(TAG, "onUserStopDragging: minHeaderTranslate " + minHeaderTranslate);
+        //Log.i(TAG, "onUserStopDragging: maxHeaderTranslate " + maxHeaderTranslate);
+        //Log.i(TAG, "onUserStopDragging: translateY " + translateY);
+        //Log.i(TAG, "onUserStopDragging: targetTranslateY - translateY " + (targetTranslateY - translateY));
+
+        //根据targetTranslateY的值来减去translateY来计算dy
         mOverScroller.startScroll(0, (int) translateY, 0, (int) (targetTranslateY - translateY), (int) (1000000 / Math.abs(velocity)));
         mHandler.post(flingRunnable);
         isScrolling = true;
@@ -159,9 +172,8 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         return true;
     }
 
-
-    private View getDependencyView() {
-        return mDependencyView.get();
+    private View getChildView() {
+        return mChildView.get();
     }
 
     /**
@@ -185,10 +197,10 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         @Override
         public void run() {
             if (mOverScroller.computeScrollOffset()) {
-                getDependencyView().setTranslationY(mOverScroller.getCurrY());
+                getChildView().setTranslationY(mOverScroller.getCurrY());
                 mHandler.post(this);
             } else {
-                isExpand = getDependencyView().getTranslationX() != 0;
+                isExpand = getChildView().getTranslationX() != 0;
                 isScrolling = false;
             }
         }

@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
@@ -145,6 +146,12 @@ public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
         View dependentView = getDependencyView();
         float translateY = dependentView.getTranslationY();
         float minHeaderTranslate = -(dependentView.getY() + getToolbarSpreadHeight());
+        Log.e(TAG, "onUserStopDragging: translateY " + translateY);
+        Log.i(TAG, "onUserStopDragging: dependentView.getY() " + dependentView.getY());
+        Log.i(TAG, "onUserStopDragging: getToolbarSpreadHeight() " + getToolbarSpreadHeight());
+        Log.i(TAG, "onUserStopDragging: minHeaderTranslate" + minHeaderTranslate);
+        Log.i(TAG, "onUserStopDragging: translateY - minHeaderTranslate" + (translateY - minHeaderTranslate));
+
         if (translateY == 0 || translateY == -getToolbarSpreadHeight()) {
             return false;
         }

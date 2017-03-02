@@ -1,19 +1,15 @@
-package com.gavinandre.materialdesignsamples.custombehavior;
+package com.gavinandre.materialdesignfeatures.custombehavior;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.OverScroller;
 
-import com.gavinandre.materialdesignsamples.R;
+import com.gavinandre.materialdesignfeatures.R;
 
 import java.lang.ref.WeakReference;
 

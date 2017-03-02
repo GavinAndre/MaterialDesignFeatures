@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.custombehavior;
+package com.gavinandre.materialdesignfeatures.custombehavior;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
@@ -10,12 +10,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
-import com.gavinandre.materialdesignsamples.R;
+import com.gavinandre.materialdesignfeatures.R;
 
 import java.lang.ref.WeakReference;
 

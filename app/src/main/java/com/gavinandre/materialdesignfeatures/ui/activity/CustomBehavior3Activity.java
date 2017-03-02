@@ -1,35 +1,27 @@
-package com.gavinandre.materialdesignsamples.ui.activity;
+package com.gavinandre.materialdesignfeatures.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.gavinandre.materialdesignsamples.R;
-import com.gavinandre.materialdesignsamples.tablayout.TabFragmentAdapter;
-import com.gavinandre.materialdesignsamples.ui.fragment.MyFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gavinandre.materialdesignfeatures.R;
 
 /**
  * Created by gavinandre on 17-2-13.
  */
 
-public class CustomBehavior2Activity extends AppCompatActivity {
+public class CustomBehavior3Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.custom_behavior_2);
-        initTabLayout();
+        setContentView(R.layout.custom_behavior_3);
+        //initTabLayout();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    private void initTabLayout() {
+    /*private void initTabLayout() {
         String[] titles = {"搞笑", "科技", "创业"};
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         List<Fragment> fragments = new ArrayList<Fragment>();
@@ -46,5 +38,5 @@ public class CustomBehavior2Activity extends AppCompatActivity {
         // 将ViewPager和TabLayout绑定
         tablayout.setupWithViewPager(viewPager);
 
-    }
+    }*/
 }

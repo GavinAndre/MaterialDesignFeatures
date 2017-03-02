@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples;
+package com.gavinandre.materialdesignfeatures;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior1Activity;
-import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior2Activity;
-import com.gavinandre.materialdesignsamples.ui.activity.CustomBehavior3Activity;
+import com.gavinandre.materialdesignfeatures.ui.activity.CustomBehavior1Activity;
+import com.gavinandre.materialdesignfeatures.ui.activity.CustomBehavior2Activity;
+import com.gavinandre.materialdesignfeatures.ui.activity.CustomBehavior3Activity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

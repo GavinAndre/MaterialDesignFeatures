@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.ui.activity;
+package com.gavinandre.materialdesignfeatures.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gavinandre.materialdesignsamples.R;
+import com.gavinandre.materialdesignfeatures.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

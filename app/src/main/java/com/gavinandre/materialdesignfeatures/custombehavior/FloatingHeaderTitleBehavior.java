@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.custombehavior;
+package com.gavinandre.materialdesignfeatures.custombehavior;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.gavinandre.materialdesignsamples.R;
+import com.gavinandre.materialdesignfeatures.R;
 
 
 /**

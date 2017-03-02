@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples;
+package com.gavinandre.materialdesignfeatures;
 
 import org.junit.Test;
 

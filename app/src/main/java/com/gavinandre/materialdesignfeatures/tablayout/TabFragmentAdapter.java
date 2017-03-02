@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.tablayout;
+package com.gavinandre.materialdesignfeatures.tablayout;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

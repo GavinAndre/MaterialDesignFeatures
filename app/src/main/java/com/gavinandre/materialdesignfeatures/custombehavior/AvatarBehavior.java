@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.custombehavior;
+package com.gavinandre.materialdesignfeatures.custombehavior;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.gavinandre.materialdesignsamples.R;
+import com.gavinandre.materialdesignfeatures.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

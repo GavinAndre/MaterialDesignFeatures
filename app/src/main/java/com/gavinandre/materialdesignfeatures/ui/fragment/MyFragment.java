@@ -1,4 +1,4 @@
-package com.gavinandre.materialdesignsamples.ui.fragment;
+package com.gavinandre.materialdesignfeatures.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;

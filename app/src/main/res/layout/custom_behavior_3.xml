@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -21,23 +22,19 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <ImageView
-        android:id="@+id/add_alarm_clock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/add_alarm_clock_button"
-        app:layout_behavior="@string/floating_title_behavoir"
-        app:layout_anchor="@id/scrolling_header"
-        app:layout_anchorGravity="center"/>
+        <!--app:layout_anchor="@id/scrolling_header"
+        app:layout_anchorGravity="center_vertical"/>-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
+        app:layout_anchor="@id/scrollView"
+        android:paddingBottom="60dp"
+        app:layout_anchorGravity="top|center_horizontal"
+        android:layout_marginBottom="350dp"
+        android:textColor="@android:color/white"
         android:text="想告别起床气,快去定个闹铃吧!"
-        app:layout_anchor="@id/scrolling_header"
-        app:layout_anchorGravity="center"/>
+        />
 
     <!--<LinearLayout
         android:layout_width="match_parent"
@@ -68,6 +65,16 @@
             android:text="@string/large_text"/>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/add_alarm_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/scrolling_header"
+        app:layout_anchorGravity="center"
+        android:background="@mipmap/add_alarm_clock_button_pressed"
+        app:layout_behavior="@string/floating_title_behavoir"
+        />
 
     <!--<LinearLayout
         android:layout_width="match_parent"

@@ -21,6 +21,10 @@
     <dimen name="header_offset">100dp</dimen>
     <dimen name="header_height">250dp</dimen>
 
+    <dimen name="image_view_final_size">60dp</dimen>
+    <dimen name="image_view_final_x">290dp</dimen>
+
+
     <dimen name="collapsedTitleHeight">50dp</dimen>
     <dimen name="title_init_y">150dp</dimen>
     <dimen name="title_margin_left">50dp</dimen>

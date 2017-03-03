@@ -22,8 +22,6 @@ import java.lang.ref.WeakReference;
 /**
  * Created by gavinandre on 17-2-13.
  */
-
-
 public class ToolBarScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
     private static final String TAG = ToolBarScrollBehavior.class.getSimpleName();

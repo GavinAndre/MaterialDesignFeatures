@@ -19,7 +19,7 @@ import java.util.List;
  * Created by gavinandre on 17-2-13.
  */
 
-public class CustomBehavior2Activity extends AppCompatActivity {
+public class CustomBehaviorSecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

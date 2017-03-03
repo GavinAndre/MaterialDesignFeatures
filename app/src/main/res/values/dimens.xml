@@ -18,14 +18,13 @@
     <!--CardView shadow margin under Lollipop-->
     <dimen name="card_view_margin">0dp</dimen>
 
-    <dimen name="header_offset">100dp</dimen>
-    <dimen name="header_height">250dp</dimen>
+    <!--ContentScrollBehavior-->
+    <dimen name="content_offset">100dp</dimen>
+    <dimen name="content_height">250dp</dimen>
 
-    <dimen name="image_view_final_size">60dp</dimen>
-    <dimen name="image_view_final_x">290dp</dimen>
+    <!--FloatingImageBehavior-->
+    <dimen name="floating_image_final_size">50dp</dimen>
+    <dimen name="floating_image_final_x">295dp</dimen>
+    <dimen name="floating_image_final_y">45dp</dimen>
 
-
-    <dimen name="collapsedTitleHeight">50dp</dimen>
-    <dimen name="title_init_y">150dp</dimen>
-    <dimen name="title_margin_left">50dp</dimen>
 </resources>

@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by gavinandre on 17-2-13.
  */
 
-public class CustomBehavior1Activity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class CustomBehaviorFirstActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;

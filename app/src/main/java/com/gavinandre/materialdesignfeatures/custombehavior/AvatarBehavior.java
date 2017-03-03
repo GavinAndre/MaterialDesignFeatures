@@ -186,17 +186,17 @@ public class AvatarBehavior extends CoordinatorLayout.Behavior<CircleImageView> 
         }
     }
 
-    public void setViewX(View view, float originalX, float finalX, float percent) {
+    private void setViewX(View view, float originalX, float finalX, float percent) {
         float calcX = (finalX - originalX) * percent + originalX;
         view.setX(calcX);
     }
 
-    public void setViewY(View view, float originalY, float finalY, float percent) {
+    private void setViewY(View view, float originalY, float finalY, float percent) {
         float calcY = (finalY - originalY) * percent + originalY;
         view.setY(calcY);
     }
 
-    public static void scaleView(View view, float originalSize, float finalSize, float percent) {
+    private static void scaleView(View view, float originalSize, float finalSize, float percent) {
         float calcSize = (finalSize - originalSize) * percent + originalSize;
         float caleScale = calcSize / originalSize;
         view.setScaleX(caleScale);

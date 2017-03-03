@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -22,37 +21,19 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        <!--app:layout_anchor="@id/scrolling_header"
-        app:layout_anchorGravity="center_vertical"/>-->
-
     <TextView
+        android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/scrollView"
-        android:paddingBottom="60dp"
-        app:layout_anchorGravity="top|center_horizontal"
         android:layout_marginBottom="350dp"
-        android:textColor="@android:color/white"
+        android:paddingBottom="60dp"
         android:text="想告别起床气,快去定个闹铃吧!"
+        android:textColor="@android:color/white"
+        app:layout_anchor="@id/scrollView"
+        app:layout_anchorGravity="top|center_horizontal"
         />
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        app:layout_behavior="@string/floating_title_behavoir"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="输入关键字"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            />
-    </LinearLayout>-->
-
-    <android.support.v4.widget.NestedScrollView
+    <!--<android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,35 +45,24 @@
             android:layout_height="wrap_content"
             android:text="@string/large_text"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>-->
+
+    <com.github.jdsjlzx.recyclerview.LuRecyclerView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/content_behavior"
+        />
 
     <ImageView
         android:id="@+id/add_alarm_clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@mipmap/add_alarm_clock_button_pressed"
         app:layout_anchor="@id/scrolling_header"
         app:layout_anchorGravity="center"
-        android:background="@mipmap/add_alarm_clock_button_pressed"
-        app:layout_behavior="@string/floating_title_behavoir"
+        app:layout_behavior="@string/floating_image_behavoir"
         />
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/content_behavior">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="@android:color/white"
-            app:tabMode="fixed"/>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>-->
 
 </android.support.design.widget.CoordinatorLayout>

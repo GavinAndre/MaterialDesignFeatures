@@ -17,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.CustomBehavior1Activity"/>
-        <activity android:name=".ui.activity.CustomBehavior2Activity"/>
-        <activity android:name=".ui.activity.CustomBehavior3Activity"/>
+        <activity android:name=".ui.activity.CustomBehaviorFirstActivity"/>
+        <activity android:name=".ui.activity.CustomBehaviorSecondActivity"/>
+        <activity android:name=".ui.activity.CustomBehaviorThirdActivity"/>
     </application>
 
 </manifest>

@@ -5,11 +5,10 @@
         com.gavinandre.materialdesignfeatures.custombehavior.ToolBarScrollBehavior</string>
     <string name="avatar_behavior" translatable="false">
         com.gavinandre.materialdesignfeatures.custombehavior.AvatarBehavior</string>
-
     <string name="content_behavior" translatable="false">
-        com.gavinandre.materialdesignfeatures.custombehavior.HeaderScrollBehavior</string>
-    <string name="floating_title_behavoir" translatable="false">
-        com.gavinandre.materialdesignfeatures.custombehavior.FloatingHeaderTitleBehavior</string>
+        com.gavinandre.materialdesignfeatures.custombehavior.ContentScrollBehavior</string>
+    <string name="floating_image_behavoir" translatable="false">
+        com.gavinandre.materialdesignfeatures.custombehavior.FloatingImageBehavior</string>
 
 
     <string name="large_text">

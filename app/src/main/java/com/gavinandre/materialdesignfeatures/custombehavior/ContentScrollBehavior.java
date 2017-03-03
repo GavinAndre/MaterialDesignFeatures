@@ -14,38 +14,34 @@ import com.gavinandre.materialdesignfeatures.R;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by zhouwei on 16/12/15.
+ * Created by gavinandre on 17-3-3.
  */
 
-public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
-    public static final String TAG = "HeaderScrollBehavior";
-    private final Context mContext;
-
+public class ContentScrollBehavior extends CoordinatorLayout.Behavior<View> {
+    private static final String TAG = ContentScrollBehavior.class.getSimpleName();
     private WeakReference<View> mChildView;
-
     private OverScroller mOverScroller;
-
     private Handler mHandler;
-
-    private boolean isExpand = false;
-
+    // 依赖视图起始y坐标
+    private float mDependencyOriginalY;
+    // 依赖视图最终y坐标
+    private float mDependencyFinalY;
     private boolean isScrolling = false;
 
-    public HeaderScrollBehavior(Context context, AttributeSet attributeSet) {
+    public ContentScrollBehavior(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        mContext = context;
         mOverScroller = new OverScroller(context);
         mHandler = new Handler();
-
+        mDependencyOriginalY = context.getResources().getDimensionPixelOffset(R.dimen.content_height);
+        mDependencyFinalY = context.getResources().getDimensionPixelOffset(R.dimen.content_offset);
     }
 
     @Override
     public boolean onLayoutChild(CoordinatorLayout parent, View child, int layoutDirection) {
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
         if (params != null && params.height == CoordinatorLayout.LayoutParams.MATCH_PARENT) {
-            //child.layout(0, 0, parent.getWidth(), parent.getHeight() - getHeaderCollspateHeight());
             child.layout(0, 0, parent.getWidth(), parent.getHeight());
-            child.setTranslationY(getHeaderHeight());
+            child.setTranslationY(mDependencyOriginalY);
             mChildView = new WeakReference<>(child);
             return true;
         }
@@ -77,7 +73,7 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         //上滑位置不小于100dp
         float transY = child.getTranslationY() - dy;
         Log.i(TAG, "transY:" + transY + "++++child.getTranslationY():" + child.getTranslationY() + "---->dy:" + dy);
-        if (transY > 0 && transY >= getHeaderCollspateHeight()) {
+        if (transY > 0 && transY >= mDependencyFinalY) {
             child.setTranslationY(transY);
             consumed[1] = dy;
         }
@@ -95,7 +91,7 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         //下滑位置不超过200dp
         float transY = child.getTranslationY() - dyUnconsumed;
         Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
-        if (transY > 0 && transY <= getHeaderHeight()) {
+        if (transY > 0 && transY <= mDependencyOriginalY) {
             child.setTranslationY(transY);
         }
     }
@@ -114,44 +110,35 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
 
     private boolean onUserStopDragging(float velocity, View child) {
         float translateY = child.getTranslationY();
-        float minHeaderTranslate = getHeaderCollspateHeight();
-        float maxHeaderTranslate = getHeaderHeight();
+        float minHeaderTranslate = mDependencyFinalY;
+        float maxHeaderTranslate = mDependencyOriginalY;
         float midHeaderTranslate = maxHeaderTranslate - minHeaderTranslate;
-
-
+        //中间态对比参数
         float y = translateY - maxHeaderTranslate;
         float ym = y + midHeaderTranslate;
 
+        if (translateY == mDependencyFinalY || translateY == mDependencyOriginalY) {
+            return false;
+        }
 
         //Log.e(TAG, "onUserStopDragging: translateY " + translateY);
         //Log.i(TAG, "onUserStopDragging: minHeaderTranslate " + minHeaderTranslate);
         //Log.i(TAG, "onUserStopDragging: maxHeaderTranslate " + maxHeaderTranslate);
         //Log.i(TAG, "onUserStopDragging: midHeaderTranslate " + midHeaderTranslate);
         //Log.i(TAG, "onUserStopDragging: maxHeaderTranslate - translateY " + (maxHeaderTranslate - translateY));
-        Log.i(TAG, "onUserStopDragging: y " + y);
-        Log.i(TAG, "onUserStopDragging: ym " + ym);
+        //Log.i(TAG, "onUserStopDragging: y " + y);
+        //Log.i(TAG, "onUserStopDragging: ym " + ym);
         //Log.i(TAG, "onUserStopDragging: translateY == minHeaderTranslate " + (translateY == minHeaderTranslate));
 
-        if (translateY == getHeaderCollspateHeight() || translateY == getHeaderHeight()) {
-            return false;
-        }
 
         //在这里计算有没有超过中间态
         boolean targetState; // Flag indicates whether to expand the content.
         if (Math.abs(velocity) <= 800) {
             //y范围(-450~0) ym范围(0~450),取绝对值比大小来判断滑动距离有没有超过1/2
-            if (Math.abs(y) < Math.abs(ym)) {
-                targetState = false;
-            } else {
-                targetState = true;
-            }
+            targetState = Math.abs(y) >= Math.abs(ym);
             velocity = 800; // Limit velocity's minimum value.
         } else {
-            if (velocity > 0) {
-                targetState = true;
-            } else {
-                targetState = false;
-            }
+            targetState = velocity > 0;
         }
 
         //根据targetState判断,超过中间态自动滑动剩余距离,没有则回到原处
@@ -176,22 +163,6 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
         return mChildView.get();
     }
 
-    /**
-     * header 折叠高度
-     *
-     * @return
-     */
-    public int getHeaderCollspateHeight() {
-        return mContext.getResources().getDimensionPixelOffset(R.dimen.header_offset);
-    }
-
-    public int getHeaderHeight() {
-        return mContext.getResources().getDimensionPixelOffset(R.dimen.header_height);
-    }
-
-    public boolean isDepend(View dependency) {
-        return dependency != null && dependency.getId() == R.id.scrolling_header;
-    }
 
     private Runnable flingRunnable = new Runnable() {
         @Override
@@ -200,7 +171,6 @@ public class HeaderScrollBehavior extends CoordinatorLayout.Behavior<View> {
                 getChildView().setTranslationY(mOverScroller.getCurrY());
                 mHandler.post(this);
             } else {
-                isExpand = getChildView().getTranslationX() != 0;
                 isScrolling = false;
             }
         }

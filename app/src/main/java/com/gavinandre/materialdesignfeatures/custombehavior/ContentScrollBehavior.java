@@ -70,7 +70,7 @@ public class ContentScrollBehavior extends CoordinatorLayout.Behavior<View> {
             return;
         }
 
-        //上滑位置不小于100dp
+        //上滑后的位置不小于mDependencyFinalY(100dp)
         float transY = child.getTranslationY() - dy;
         Log.i(TAG, "transY:" + transY + "++++child.getTranslationY():" + child.getTranslationY() + "---->dy:" + dy);
         if (transY > 0 && transY >= mDependencyFinalY) {
@@ -88,7 +88,7 @@ public class ContentScrollBehavior extends CoordinatorLayout.Behavior<View> {
             return;
         }
 
-        //下滑位置不超过200dp
+        //下滑后的位置不大于mDependencyOriginalY(250dp)
         float transY = child.getTranslationY() - dyUnconsumed;
         Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
         if (transY > 0 && transY <= mDependencyOriginalY) {
@@ -162,7 +162,6 @@ public class ContentScrollBehavior extends CoordinatorLayout.Behavior<View> {
     private View getChildView() {
         return mChildView.get();
     }
-
 
     private Runnable flingRunnable = new Runnable() {
         @Override
